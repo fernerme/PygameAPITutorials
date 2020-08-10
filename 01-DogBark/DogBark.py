@@ -13,10 +13,12 @@ def main():
 
     # prepare the window (screen)
     screen = pygame.display.set_mode((IMAGE_SIZE, IMAGE_SIZE + TEXT_HEIGHT))
-    pygame.display.set_caption("Text, Sound, and an Image")
+    pygame.display.set_caption("Image, Text, and Sound")
 
     # Load the music and the image
-    # TODO 1: Create an image with the 2dogs.JPG image
+    # DONE 1: Create an image with the 2dogs.JPG image
+    image1 = pygame.image.load("2dogs.JPG")
+
     # TODO 4: Create a font object with a size 28 font.
     # TODO 8: Create a Sound object from the "bark.wav" file.
 
@@ -30,8 +32,11 @@ def main():
         screen.fill(WHITE)
 
         # Draw the image onto the screen
-        # TODO 3: Scale the image to be the size (IMAGE_SIZE, IMAGE_SIZE)
-        # TODO 2: Draw (blit) the image onto the screen at position (0, 0)
+        # DONE 3: Scale the image to be the size (IMAGE_SIZE, IMAGE_SIZE)
+        # NOTE: This is slower & more inefficient than resizing the image in an image editing program.
+        image1 = pygame.transform.scale(image1, (IMAGE_SIZE, IMAGE_SIZE))
+        # DONE 2: Draw (blit) the image onto the screen at position (0, 0)
+        screen.blit(image1, (0,0))
 
         # Draw the text onto the screen
         # TODO 5: Render the text "Two Dogs" using the font object (it's like MAKING an image).
