@@ -9,9 +9,14 @@ def main():
 
     eye_x = 0
     eye_y = 0
+    clock = pygame.time.Clock()
 
     while True:
-        # TODO 4: Set the clock speed to 60 fps
+        # DONE 4: Set the clock speed to 60 fps
+        # MUST highlight code from "pressed keys =" to "eye_x = eye_x +5" and press shift+tab
+        # (so code is outside of loop) in order for frame rate to visibly affect anything.
+        clock.tick(60)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
