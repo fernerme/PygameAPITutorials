@@ -19,7 +19,13 @@ def main():
     # DONE 1: Create an image with the 2dogs.JPG image
     image1 = pygame.image.load("2dogs.JPG")
 
-    # TODO 4: Create a font object with a size 28 font.
+    # DONE 4: Create a font object with a size 28 font.
+    font1 = pygame.font.Font(None, 28)
+    font2 = pygame.font.Font(None, 55)
+    # print(pygame.font.get_fonts())
+    # I tried to change the font, but I don't really want to go downloading fonts right now, so I'm going to hold off
+    # and try to figure it out later if it becomes relevant to my game :)
+
     # TODO 8: Create a Sound object from the "bark.wav" file.
 
     while True:
@@ -39,10 +45,15 @@ def main():
         screen.blit(image1, (0,0))
 
         # Draw the text onto the screen
-        # TODO 5: Render the text "Two Dogs" using the font object (it's like MAKING an image).
-        # TODO 6: Draw (blit) the text image onto the screen in the middle bottom.
+        # DONE 5: Render the text "Two Dogs" using the font object (it's like MAKING an image).
+        caption1 = font1.render("Two Dogs", True, BLACK)
+
+        # DONE 6: Draw (blit) the text image onto the screen in the middle bottom.
+        screen.blit(caption1, ((image1.get_width() // 2) - (caption1.get_width() // 2), image1.get_height() + 5))
 
         # TODO 7: On your own, create a new bigger font and in white text place a 'funny' message on top of the image.
+        caption2 = font2.render("BOOP!", True, WHITE)
+        screen.blit(caption2, ((image1.get_width() // 2) - (caption2.get_width() // 2), 2))
 
         # Update the screen
         pygame.display.update()
