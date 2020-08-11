@@ -7,29 +7,33 @@ import random  # Note this!
 class Raindrop:
     def __init__(self, screen, x, y):
         """ Creates a Raindrop sprite that travels down at a random speed. """
-        # TODO 8: Initialize this Raindrop, as follows:
-        # TODO    - Store the screen.
-        # TODO    - Set the initial position of the Raindrop to x and y.
-        # TODO    - Set the initial speed to a random integer between 5 and 15.
-        # TODO  Use instance variables:   screen  x  y  speed.
-        pass
+        # DONE 8: Initialize this Raindrop, as follows:
+        #     - Store the screen.
+        #     - Set the initial position of the Raindrop to x and y.
+        #     - Set the initial speed to a random integer between 5 and 15.
+        #     Use instance variables:   screen  x  y  speed.
+        self.screen = screen
+        self.x = x
+        self.y = y
+        self.speed = random.randint(5, 15)
 
     def move(self):
         """ Move the self.y value of the Raindrop down the screen (y increase) at the self.speed. """
-        # TODO 11: Change the  y  position of this Raindrop by its speed.
-        pass
+        # DONE 11: Change the  y  position of this Raindrop by its speed.
+        self.y += self.speed
+        # Means same thing as "self.y = self.y + self.speed"
 
     def off_screen(self):
         """ Returns true if the Raindrop y value is not shown on the screen, otherwise false. """
         # Note: this will be used for testing, but not used in the final version of the code for the sake of simplicity.
-        # TODO 13: Return  True  if the  y  position of this Raindrop is greater than 800.
-        pass
+        # DONE 13: Return  True  if the  y  position of this Raindrop is greater than 800.
+        return self.y > self.screen.get_height()
 
     def draw(self):
         """ Draws this sprite onto the screen. """
-        # TODO 9: Draw a vertical line that is 5 pixels long, 2 pixels thick,
-        # TODO     from the current position of this Raindrop (use either a black or blue color).
-        pass
+        # DONE 9: Draw a vertical line that is 5 pixels long, 2 pixels thick,
+        #            from the current position of this Raindrop (use either a black or blue color).
+        pygame.draw.line(self.screen, (0, 0, 127), (self.x, self.y), (self.x, self.y + 5), 2)
 
 
 class Hero:
@@ -96,7 +100,9 @@ def main():
     # DONE 2: Make a Clock
     clock = pygame.time.Clock()
 
-    # TODO 7: As a temporary test, make a new Raindrop called test_drop at x=320 y=10
+    # DONE 7: As a temporary test, make a new Raindrop called test_drop at x=320 y=10
+    test_drop = Raindrop(screen, 320, 10)
+
     # TODO 15: Make a Hero, named mike, with appropriate images, starting at position x=300 y=400.
     # TODO 23: Make a Cloud, named cloud, with appropriate images, starting at position x=300 y=50.
 
@@ -121,9 +127,13 @@ def main():
         # DONE 5: Inside the game loop, draw the screen (fill with white)
         screen.fill((255, 255, 255))
 
-        # TODO 12: As a temporary test, move test_drop
-        # TODO 14: As a temporary test, check if test_drop is off screen, if so reset the y position to 10
-        # TODO 10: As a temporary test, draw test_drop
+        # DONE 12: As a temporary test, move test_drop
+        test_drop.move()
+        # DONE 14: As a temporary test, check if test_drop is off screen, if so reset the y position to 10
+        if test_drop.off_screen():
+            test_drop.y = 10
+        # DONE 10: As a temporary test, draw test_drop
+        test_drop.draw()
 
         # TODO 20: As a temporary test, check if test_drop is hitting Mike, if so set Mike's last_hit_time
         # TODO 22: When you run this test, slow the rain down to a speed of 2 to see the result, then remove that code
