@@ -26,13 +26,16 @@ def main():
     # I tried to change the font, but I don't really want to go downloading fonts right now, so I'm going to hold off
     # and try to figure it out later if it becomes relevant to my game :)
 
-    # TODO 8: Create a Sound object from the "bark.wav" file.
+    # DONE 8: Create a Sound object from the "bark.wav" file.
+    bark_sound = pygame.mixer.Sound("bark.wav")
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            # TODO 9: Play the music (bark) if there's a mouse click.
+            # DONE 9: Play the music (bark) if there's a mouse click.
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                bark_sound.play()
 
         # Clear the screen and set the screen background
         screen.fill(WHITE)
@@ -51,7 +54,7 @@ def main():
         # DONE 6: Draw (blit) the text image onto the screen in the middle bottom.
         screen.blit(caption1, ((image1.get_width() // 2) - (caption1.get_width() // 2), image1.get_height() + 5))
 
-        # TODO 7: On your own, create a new bigger font and in white text place a 'funny' message on top of the image.
+        # DONE 7: On your own, create a new bigger font and in white text place a 'funny' message on top of the image.
         caption2 = font2.render("BOOP!", True, WHITE)
         screen.blit(caption2, ((image1.get_width() // 2) - (caption2.get_width() // 2), 2))
 
