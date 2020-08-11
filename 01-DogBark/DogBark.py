@@ -27,7 +27,12 @@ def main():
     # and try to figure it out later if it becomes relevant to my game :)
 
     # DONE 8: Create a Sound object from the "bark.wav" file.
+    # THIS IS THE "CORRECT" WAY TO PLAY SOUND
     bark_sound = pygame.mixer.Sound("bark.wav")
+    # THIS IS THE "INCORRECT" WAY TO PLAY SOUND (consider converting file to .wav with another program).
+    # However this IS the correct way to play background music :)
+    # See commented out code under T0D0 9 to see how it is implemented
+    # pygame.mixer.music.load("bark.mp3")
 
     while True:
         for event in pygame.event.get():
@@ -36,6 +41,7 @@ def main():
             # DONE 9: Play the music (bark) if there's a mouse click.
             if event.type == pygame.MOUSEBUTTONDOWN:
                 bark_sound.play()
+                # pygame.mixer.music.play()
 
         # Clear the screen and set the screen background
         screen.fill(WHITE)
