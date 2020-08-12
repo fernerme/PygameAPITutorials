@@ -116,14 +116,23 @@ class ViewController:
 
     def check_event(self, event):
         """ Takes actions as necessary based on the current event. """
-        # TODO 16: If the event is pygame.MOUSEBUTTONUP
+        # DONE 16: If the event is pygame.MOUSEBUTTONUP
         #     Get the mouse click position as x and y variables
         #     Convert the x and y variables into row and col using get_row_col
         #     Inform the model object about this event
-        # TODO 17: If the event is pygame.KEYDOWN
+        if event.type == pygame.MOUSEBUTTONUP:
+            click_x, click_y = pygame.mouse.get_pos()  # same as "click_x, click_y = event.pos"
+            row, col = get_row_col(click_x, click_y)
+            # print(row, col)
+            self.game.take_turn(row, col)
+
+        # DONE 17: If the event is pygame.KEYDOWN
         #     Get the pressed_keys
         #     If the key is pygame.K_SPACE, then reset the game.
-        pass
+        if event.type == pygame.KEYDOWN:
+            pressed_keys = pygame.key.get_pressed()
+            if pressed_keys[pygame.K_SPACE]:
+                self.game = Game()
 
     def draw(self):
         """ Draw the board based on the marked store in the board configuration array """
