@@ -115,6 +115,7 @@ def main():
     clock = pygame.time.Clock()
     pygame.display.set_caption("SPACE INVADERS!")
     screen = pygame.display.set_mode((640, 650))
+    is_game_over = False
 
     # DONE 9: Set    enemy_rows    to an initial value of 3.
     # DONE 10: Create an EnemyFleet object (called enemy_fleet) with the screen and enemy_rows
@@ -124,6 +125,7 @@ def main():
     # DONE 1: Create a Fighter (called fighter) at location  320, 590
     fighter = Fighter(screen)
 
+    game_over_image = pygame.image.load("gameover.png")
     while True:
         clock.tick(60)
         for event in pygame.event.get():
@@ -137,6 +139,18 @@ def main():
                 sys.exit()
 
         screen.fill((0, 0, 0))
+        # Do some draw before game over:
+        fighter.draw()
+        enemy_fleet.draw()
+        for missile in fighter.missiles:
+            missile.draw()
+
+
+        if is_game_over:
+            screen.blit(game_over_image, (170, 200))
+            pygame.display.update()
+            continue  # "Continue" basically makes this the end of the loop (but DOES not break)
+
         pressed_keys = pygame.key.get_pressed()
         # DONE 3: If pygame.K_LEFT is pressed and fighter.x is greater than -50 move the fighter left 5
         # DONE 4: If pygame.K_RIGHT is pressed and fighter.x is less than 590 move the fighter right 5
@@ -144,24 +158,17 @@ def main():
             fighter.x -= 5
         if pressed_keys[pygame.K_RIGHT] and fighter.x < screen.get_width() - fighter.image.get_width() / 2:
             fighter.x += 5
-        # DONE 2: Draw the fighter
-        fighter.draw()
 
-        # DONE 11: Move the enemy_fleet
-        # DONE 12: Draw the enemy_fleet
         enemy_fleet.move()
-        enemy_fleet.draw()
 
-        # Use the Supergunn!!!! ((used for testing))
-        if pressed_keys[pygame.K_SPACE]:
-            fighter.fire()
+        # Use the Supergun!!!! ((used for testing))
+        """if pressed_keys[pygame.K_SPACE]:
+            fighter.fire()"""
 
         # DONE 6: For each missile in the fighter missiles
         #   DONE 7: Move the missile
-        #   DONE 8: Draw the missile
         for missile in fighter.missiles:
             missile.move()
-            missile.draw()
 
         # DONE 12: For each badguy in the enemy_fleet.badguys list
         #     DONE 13: For each missile in the fighter missiles
@@ -187,10 +194,13 @@ def main():
             enemy_rows += 1
             enemy_fleet = EnemyFleet(screen, enemy_rows)
 
-        # TODO 22: Check for your death.  Figure out what needs to happen.
+        # DONE 22: Check for your death.  Figure out what needs to happen.
         # Hints: Check if a Badguy gets a y value greater than 545
         #    If that happens set a variable (game_over) as appropriate
         #    If the game is over, show the gameover.png image at (170, 200)
+        for badguy in enemy_fleet.badguys:
+            if badguy.y > screen.get_height() - fighter.image.get_height() - badguy.image.get_height():
+                is_game_over = True
 
         # TODO 23: Create a Scoreboard class (from scratch)
         # Hints: Instance variables: screen, score, and font (size 30)
